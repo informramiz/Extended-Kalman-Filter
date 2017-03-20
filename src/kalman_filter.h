@@ -64,6 +64,11 @@ public:
    */
   void UpdateEKF(const Eigen::VectorXd &z);
 
+  /**
+   * Non-linear function h(x) that maps cartesian coordinates @param x =(px, py, vx, vy)
+   * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
+   */
+  Eigen::VectorXd MapToPolar(const Eigen::VectorXd& x);
 };
 
 #endif /* KALMAN_FILTER_H_ */
