@@ -46,7 +46,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 }
 
 MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
-  Eigen::MatrixXd Hj(3, 4);
+  Eigen::MatrixXd Hj = MatrixXd::Zero(3, 4);
 
   //state parameters
   float px = x_state(0);
@@ -56,8 +56,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
   //divsion by zero check
   if(px == 0 || py == 0 ) {
-    std::cout << "calculateJacobian() - Error - Division by zero";
-    return Hj;
+    throw "calculateJacobian() - Error - Division by zero";
   }
 
   // calculating common values used in Jacobian
@@ -68,8 +67,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   float px2_py2_sum_3_by_2 = pow((px2_py2_sum), 3/2.0);
 
   if(fabs(px2_py2_sum) < 0.0001) {
-    std::cout << "calculateJacobian() - Error - Division by zero";
-    return Hj;
+    throw "calculateJacobian() - Error - Division by zero";
   }
 
   // calculating and inserting jacobian values
