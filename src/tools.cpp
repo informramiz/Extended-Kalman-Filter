@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tools.h"
+#include "DivisionByZeroException.h"
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
@@ -56,7 +57,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
   //divsion by zero check
   if(px == 0 || py == 0 ) {
-    throw "calculateJacobian() - Error - Division by zero";
+    throw DivisionByZeroException();
   }
 
   // calculating common values used in Jacobian
@@ -67,7 +68,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   float px2_py2_sum_3_by_2 = pow((px2_py2_sum), 3/2.0);
 
   if(fabs(px2_py2_sum) < 0.0001) {
-    throw "calculateJacobian() - Error - Division by zero";
+    throw DivisionByZeroException();
   }
 
   // calculating and inserting jacobian values

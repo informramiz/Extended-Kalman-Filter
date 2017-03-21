@@ -1,7 +1,8 @@
+#include <iostream>
+#include "Eigen/Dense"
 #include "FusionEKF.h"
 #include "tools.h"
-#include "Eigen/Dense"
-#include <iostream>
+#include "DivisionByZeroException.h"
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -130,7 +131,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       ekf_.H_ = Hj_;
       ekf_.R_ = R_radar_;
       ekf_.UpdateEKF(measurement_pack.raw_measurements_);
-    } catch(...) {
+    } catch(DivisionByZeroException & error) {
 
     }
   } else {
