@@ -18,10 +18,99 @@ void check_arguments(int argc, char* argv[]);
 void check_files(ifstream& in_file, string& in_name,
                  ofstream& out_file, string& out_name);
 void project_test(int argc, char* argv[]);
+void test_mine();
+void runKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list);
+vector<MeasurementPackage> readMeasurements();
 
 int main(int argc, char* argv[]) {
-
+  project_test(argc, argv);
   return 0;
+}
+
+void test_mine() {
+   vector<MeasurementPackage> measurements = readMeasurements();
+   runKalmanFilter(measurements);
+}
+
+void runKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list) {
+    //Create a Tracking instance
+    FusionEKF fusionEKF;
+
+    size_t size = measurement_pack_list.size();
+    //call processMeasurement for each measurement
+    for(size_t i = 0; i < size; ++i) {
+        fusionEKF.ProcessMeasurement(measurement_pack_list[i]);
+    }
+}
+
+vector<MeasurementPackage> readMeasurements() {
+
+    vector<MeasurementPackage> measurement_pack_list;
+
+    // hardcoded input file with laser and radar measurements
+    string in_file_name = "data/obj_pose-laser-radar-synthetic-input.txt";
+    ifstream inFile(in_file_name.c_str(), std::ifstream::in);
+
+    if(!inFile.is_open()) {
+        std::cout << "Can not open input file: " << in_file_name << std::endl;
+        return measurement_pack_list;
+    }
+
+    // set i to get only first 3 measurments
+    int i = 0;
+    string line;
+    while(getline(inFile, line) && (i <= 5)) {
+        MeasurementPackage measurement_pack;
+        string sensor_type;
+        long timestamp;
+
+        istringstream iss(line); //reads first element from the current line
+        iss >> sensor_type;
+        if (sensor_type.compare("L") == 0) { //laser measurement
+            //read measurements
+            measurement_pack.sensor_type_ = MeasurementPackage::LASER;
+            measurement_pack.raw_measurements_ = Eigen::VectorXd(2);
+
+            float x;
+            float y;
+
+            iss >> x;
+            iss >> y;
+            iss >> timestamp;
+
+            measurement_pack.raw_measurements_ << x, y;
+            measurement_pack.timestamp_ = timestamp;
+
+            measurement_pack_list.push_back(measurement_pack);
+        } else if(sensor_type.compare("R") == 0) { //Radar measurement
+            //read measurements
+            measurement_pack.sensor_type_ = MeasurementPackage::RADAR;
+            measurement_pack.raw_measurements_ = Eigen::VectorXd(3);
+
+            float p;
+            float phi;
+            float p_dot;
+
+            iss >> p;
+            iss >> phi;
+            iss >> p_dot;
+            iss >> timestamp;
+
+            measurement_pack.raw_measurements_ << p, phi, p_dot;
+            measurement_pack.timestamp_ = timestamp;
+
+            measurement_pack_list.push_back(measurement_pack);
+//          continue;
+        }
+
+        i++;
+    }
+
+    if(inFile.is_open()) {
+        inFile.close();
+    }
+
+    return measurement_pack_list;
 }
 
 void project_test(int argc, char* argv[]) {
