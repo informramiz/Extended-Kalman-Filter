@@ -12,18 +12,18 @@
 class FusionEKF {
 public:
   /**
-  * Constructor.
-  */
+   * Constructor.
+   */
   FusionEKF();
 
   /**
-  * Destructor.
-  */
+   * Destructor.
+   */
   virtual ~FusionEKF();
 
   /**
-  * Run the whole flow of the Kalman Filter from here.
-  */
+   * Run the whole flow of the Kalman Filter from here.
+   */
   void ProcessMeasurement(const MeasurementPackage &measurement_pack);
 
   /**
@@ -34,16 +34,21 @@ public:
   Eigen::MatrixXd calculateJacobian(const Eigen::VectorXd& x_state);
 
   /**
-   * Non-linear function h(x) that maps cartesian coordinates (px, py, vx, vy)
+   * Non-linear function that maps cartesian coordinates @param z =(px, py, vx, vy)
    * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
    */
   Eigen::VectorXd MapToCartesian(const Eigen::VectorXd& z);
 
+  /**
+   * Given the @param timestamp of new measurement it calculates
+   * time differnece delta_t in seconds. It then uses that time difference to
+   * update state transition matrix F and process covariance matrix Q
+   */
   void UpdatePredictionMatrices(long timestamp);
 
   /**
-  * Kalman Filter update and prediction math lives in here.
-  */
+   * Kalman Filter update and prediction math lives in here.
+   */
   KalmanFilter ekf_;
 
 private:
