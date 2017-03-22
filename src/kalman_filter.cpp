@@ -49,10 +49,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd z_prediction = MapToPolar(x_);
 
   //calculate the difference between
-  // predicted and actual measurement
+  //predicted and actual measurement
   VectorXd y = z - z_prediction;
-  //calculate Jacobian
-//  Eigen::MatrixXd Hj = calculateJacobian(x_);
 
   // Calculate Kalman Game
   MatrixXd S = H_ * P_ * H_.transpose() + R_;
@@ -66,17 +64,16 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 }
 
 Eigen::VectorXd KalmanFilter::MapToPolar(const Eigen::VectorXd& x) {
-    Eigen::VectorXd z_predicted(3);
+  Eigen::VectorXd z_predicted(3);
 
-    float px = x(0);
-    float py = x(1);
-    float vx = x(2);
-    float vy = x(3);
+  float px = x(0);
+  float py = x(1);
+  float vx = x(2);
+  float vy = x(3);
 
-    float px2_py2_sum = px * px + py * py;
-    float px2_py2_sum_sqrt = sqrt(px2_py2_sum);
+  float px2_py2_sum = px * px + py * py;
+  float px2_py2_sum_sqrt = sqrt(px2_py2_sum);
 
-    z_predicted << px2_py2_sum_sqrt, atan2(py, px), ((px * vx + py * vy) / px2_py2_sum_sqrt);
-
-    return z_predicted;
+  z_predicted << px2_py2_sum_sqrt, atan2(py, px), ((px * vx + py * vy) / px2_py2_sum_sqrt);
+  return z_predicted;
 }
