@@ -27,13 +27,6 @@ public:
   void ProcessMeasurement(const MeasurementPackage &measurement_pack);
 
   /**
-   * Calculates jacobian matrix Hj, given input @param x_state = (px, py, vx, vy)
-   * and output z = (range=rho, angle=phi, range_rate=rho_dot).
-   * It is used for linear approximation of non-linear function h(x)
-   */
-  Eigen::MatrixXd calculateJacobian(const Eigen::VectorXd& x_state);
-
-  /**
    * Non-linear function that maps cartesian coordinates @param z =(px, py, vx, vy)
    * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
    */
