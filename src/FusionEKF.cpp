@@ -147,6 +147,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   cout << "P_ = " << ekf_.P_ << endl;
 }
 
+Eigen::VectorXd FusionEKF::GetEstimations() const {
+  return ekf_.x_;
+}
+
 Eigen::VectorXd FusionEKF::MapToCartesian(const Eigen::VectorXd& z) {
   float rho = z(0);
   float phi = z(1);
