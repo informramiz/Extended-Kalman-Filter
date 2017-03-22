@@ -1,6 +1,7 @@
 #include <iostream>
 #include "tools.h"
-#include "DivisionByZeroException.h"
+
+#include "division_by_zero_exception.h"
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;

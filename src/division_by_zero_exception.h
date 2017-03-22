@@ -5,8 +5,8 @@
  *      Author: ramiz
  */
 
-#ifndef DIVISIONBYZEROEXCEPTION_H_
-#define DIVISIONBYZEROEXCEPTION_H_
+#ifndef DIVISION_BY_ZERO_EXCEPTION_H_
+#define DIVISION_BY_ZERO_EXCEPTION_H_
 #include <exception>
 
 class DivisionByZeroException : public std::exception {
@@ -17,4 +17,4 @@ class DivisionByZeroException : public std::exception {
 
 
 
-#endif /* DIVISIONBYZEROEXCEPTION_H_ */
+#endif /* DIVISION_BY_ZERO_EXCEPTION_H_ */

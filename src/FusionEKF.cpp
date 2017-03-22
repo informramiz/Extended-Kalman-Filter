@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Eigen/Dense"
 #include "FusionEKF.h"
+
+#include "division_by_zero_exception.h"
 #include "tools.h"
-#include "DivisionByZeroException.h"
 
 using namespace std;
 using Eigen::MatrixXd;
