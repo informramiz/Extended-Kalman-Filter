@@ -13,26 +13,26 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::vector;
 
-void check_arguments(int argc, char* argv[]);
+void CheckArguments(int argc, char* argv[]);
 
-void check_files(ifstream& in_file, string& in_name,
+void CheckFiles(ifstream& in_file, string& in_name,
                  ofstream& out_file, string& out_name);
-void project_test(int argc, char* argv[]);
-void test_mine();
-void runKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list);
+void ProjectTest(int argc, char* argv[]);
+void TestMine();
+void RunKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list);
 vector<MeasurementPackage> readMeasurements();
 
 int main(int argc, char* argv[]) {
-  project_test(argc, argv);
+  ProjectTest(argc, argv);
   return 0;
 }
 
-void test_mine() {
+void TestMine() {
    vector<MeasurementPackage> measurements = readMeasurements();
-   runKalmanFilter(measurements);
+   RunKalmanFilter(measurements);
 }
 
-void runKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list) {
+void RunKalmanFilter(const vector<MeasurementPackage> & measurement_pack_list) {
     //Create a Tracking instance
     FusionEKF fusionEKF;
 
@@ -113,8 +113,8 @@ vector<MeasurementPackage> readMeasurements() {
     return measurement_pack_list;
 }
 
-void project_test(int argc, char* argv[]) {
-  check_arguments(argc, argv);
+void ProjectTest(int argc, char* argv[]) {
+  CheckArguments(argc, argv);
 
   string in_file_name_ = argv[1];
   ifstream in_file_(in_file_name_.c_str(), ifstream::in);
@@ -122,7 +122,7 @@ void project_test(int argc, char* argv[]) {
   string out_file_name_ = argv[2];
   ofstream out_file_(out_file_name_.c_str(), ofstream::out);
 
-  check_files(in_file_, in_file_name_, out_file_, out_file_name_);
+  CheckFiles(in_file_, in_file_name_, out_file_, out_file_name_);
 
   vector<MeasurementPackage> measurement_pack_list;
   vector<GroundTruthPackage> gt_pack_list;
@@ -245,7 +245,7 @@ void project_test(int argc, char* argv[]) {
   }
 }
 
-void check_arguments(int argc, char* argv[]) {
+void CheckArguments(int argc, char* argv[]) {
   string usage_instructions = "Usage instructions: ";
   usage_instructions += argv[0];
   usage_instructions += " path/to/input.txt output.txt";
@@ -268,7 +268,7 @@ void check_arguments(int argc, char* argv[]) {
   }
 }
 
-void check_files(ifstream& in_file, string& in_name,
+void CheckFiles(ifstream& in_file, string& in_name,
                  ofstream& out_file, string& out_name) {
   if (!in_file.is_open()) {
     cerr << "Cannot open input file: " << in_name << endl;
