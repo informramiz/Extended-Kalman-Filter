@@ -26,12 +26,6 @@ public:
    */
   void ProcessMeasurement(const MeasurementPackage& measurement_pack);
 
-  /**
-   * Non-linear function that maps cartesian coordinates @param z =(px, py, vx, vy)
-   * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
-   */
-  Eigen::VectorXd MapToCartesian(const Eigen::VectorXd& z);
-
   Eigen::VectorXd GetEstimations() const;
 
 private:
@@ -41,6 +35,12 @@ private:
    * update state transition matrix F and process covariance matrix Q
    */
   void UpdatePredictionMatrices(long timestamp);
+
+  /**
+   * Non-linear function that maps cartesian coordinates @param z =(px, py, vx, vy)
+   * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
+   */
+  Eigen::VectorXd MapToCartesian(const Eigen::VectorXd& z);
 
   // check whether the tracking toolbox was initiallized or not (first measurement)
   bool is_initialized_;
