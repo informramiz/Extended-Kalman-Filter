@@ -4,25 +4,6 @@
 
 class KalmanFilter {
 public:
-
-  // state vector
-  Eigen::VectorXd x_;
-
-  // state covariance matrix
-  Eigen::MatrixXd P_;
-
-  // state transistion matrix
-  Eigen::MatrixXd F_;
-
-  // process covariance matrix
-  Eigen::MatrixXd Q_;
-
-  // measurement matrix
-  Eigen::MatrixXd H_;
-
-  // measurement covariance matrix
-  Eigen::MatrixXd R_;
-
   /**
    * Constructor
    */
@@ -69,6 +50,24 @@ public:
    * to polar coordinates (range=rho, angle=phi, range_rate=rho_dot)
    */
   Eigen::VectorXd MapToPolar(const Eigen::VectorXd& x);
+
+  // state vector
+  Eigen::VectorXd x_;
+
+  // state covariance matrix
+  Eigen::MatrixXd P_;
+
+  // state transistion matrix
+  Eigen::MatrixXd F_;
+
+  // process covariance matrix
+  Eigen::MatrixXd Q_;
+
+  // measurement matrix
+  Eigen::MatrixXd H_;
+
+  // measurement covariance matrix
+  Eigen::MatrixXd R_;
 };
 
 #endif /* KALMAN_FILTER_H_ */
