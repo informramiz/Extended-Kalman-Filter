@@ -1,4 +1,5 @@
 # Extended-Kalman-Filter (EKF)
+
 Extended Kalman Filter in C++ for Lidar and Radar data Sensor Fusion. This implementation of EKF is written in C++, custom and targeted to vehicle localization. It takes data from Lidar and Radar to calculate vehicle position and vehicle velocity.
 
 This implementation of EKF differs from standard implementation of EKF in a way that
@@ -7,6 +8,30 @@ This implementation of EKF differs from standard implementation of EKF in a way 
 
 
 This code uses [Eigen library](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58b7604e_eigen/eigen.zip). I have also added this library to repo for convinience. You can also download it directly to get its latest version.
+
+## Getting Started
+
+```
+// Create a Fusion EKF instance
+FusionEKF fusionEKF;
+
+// Create a measurement package to process
+MeasurementPackage measurement_pack;
+
+measurement_pack.sensor_type_ = MeasurementPackage::LASER;
+measurement_pack.raw_measurements_ = VectorXd(2);
+
+float px = 1;
+float py = 2;
+long timestamp = 45454354; //some timestamp in micro seconds
+
+measurement_pack.raw_measurements_ << px, py;
+measurement_pack.timestamp_ = timestamp;
+
+fusionEKF.ProcessMeasurement(measurement_pack);
+Eigen::VectorXd x = fusionEKF.GetEstimations();
+std::cout << "Estimated x: " << x << std::endl;
+```
 
 ## Accuracy of this Extend Kalman Filter Implementation
 
