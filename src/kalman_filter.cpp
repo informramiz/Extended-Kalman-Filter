@@ -51,6 +51,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   //calculate the difference between
   //predicted and actual measurement
   VectorXd y = z - z_prediction;
+  y(1) = Tools::NormalizeAngle(y(1));
 
   // Calculate Kalman Game
   MatrixXd S = H_ * P_ * H_.transpose() + R_;
