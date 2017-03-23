@@ -111,7 +111,7 @@ void ReadMeasurements(string in_file_name, vector<MeasurementPackage> &measureme
   ifstream in_file(in_file_name.c_str(), ifstream::in);
 
   if (!in_file.is_open()) {
-    std::cerr << "Can not open file: " << in_file << std::endl;
+    std::cerr << "Can not open file: " << in_file_name << std::endl;
     exit(EXIT_FAILURE);
   }
 
