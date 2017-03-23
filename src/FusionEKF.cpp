@@ -156,17 +156,13 @@ Eigen::VectorXd FusionEKF::MapToCartesian(const Eigen::VectorXd& z) {
   float phi = z(1);
   float rho_dot = z(2);
 
+  //calculate px and py which is basically project of rho
+  //on x and y axis.
   float px = rho * cos(phi);
   float py = rho * sin(phi);
+  //calculate vx and vy by projecting rho_dot onto x and y axis
   float vx = rho_dot * cos(phi);
   float vy = rho_dot * sin(phi);
-
-  //    float px2_py2_sum = px * px + py * py;
-  //    float px2_py2_sum_sqrt = sqrt(px2_py2_sum);
-  //    float c = rho_dot * px2_py2_sum_sqrt;
-  //    float vx = c / px;
-  //    float vy = c / py;
-
 
   Eigen::VectorXd cartesian(4);
   cartesian << px, py, vx, vy;
