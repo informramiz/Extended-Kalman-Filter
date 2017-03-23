@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include "kalman_filter.h"
 
 using Eigen::MatrixXd;
