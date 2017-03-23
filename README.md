@@ -8,9 +8,32 @@ This implementation of EKF differs from standard implementation of EKF in a way 
 
 This code uses [Eigen library](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58b7604e_eigen/eigen.zip). I have also added this library to repo for convinience. You can also download it directly to get its latest version.
 
+## Accuracy of this Extend Kalman Filter Implementation
+
+I tested this algorithm on two data files provided in _data_ folder. 
+
+- Testing on file _sample-laser-radar-measurement-data-1.txt_ I got 
+
+``
+Accuracy - RMSE:
+px = 0.0651648
+py = 0.0605379
+vx = 0.533212
+vy = 0.544193
+``
+
+- Testing on file _sample-laser-radar-measurement-data-2.txt_ I got
+``
+Accuracy - RMSE:
+px = 0.185496
+py = 0.190302
+vx = 0.476754
+vy = 0.804469
+``
+
 ## Basic Build Instructions
 
-1. Clone this repo.
+1. Clone this repo. You can use the build-script.sh to build and run with cmake and make automatically or you can follow steps given below.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make` 
    * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
