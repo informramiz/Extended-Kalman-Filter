@@ -6,13 +6,14 @@ This implementation of EKF differs from standard implementation of EKF in a way 
 - For measurement update of Lidar data a linear function is used
 - For prediction step a linear model is used so instead of non-linear model and Jacobian Fj, regular Kalman Filter equations and matrix F are used. 
 
+
 **sample-laser-radar-measurement-data-1**
 
 ![data1](visualization/data1_plot.png)
 
 **sample-laser-radar-measurement-data-2**
 
-![data1](visualization/data1_plot.png)
+![data1](visualization/data2_plot.png)
 
 This code uses [Eigen library](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58b7604e_eigen/eigen.zip). I have also added this library to repo for convinience. You can also download it directly to get its latest version.
 
