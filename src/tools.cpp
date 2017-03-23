@@ -81,6 +81,6 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 }
 
 float Tools::NormalizeAngle(float angle_rad) {
-  angle_rad = angle_rad - 2*M_PI*floor( (angle_rad+ M_PI)/(2 * M_PI) );
+  angle_rad = angle_rad - 2*M_PI*floor((angle_rad+ M_PI)/(2 * M_PI ));
   return angle_rad;
 }
