@@ -99,7 +99,6 @@ void RunEkf(const vector<MeasurementPackage>& measurement_pack_list,
   }
 
   // compute the accuracy (RMSE)
-  Tools tools;
   cout << "Accuracy - RMSE:" << endl << Tools::CalculateRMSE(estimations, ground_truth) << endl;
 
   if (out_file.is_open()) {
